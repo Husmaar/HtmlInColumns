@@ -1,0 +1,58 @@
+﻿html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #FFF;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 15px;
+    line-height: 24px;
+}
+
+h1, h2, h3 {
+    font-family: Arial,sans-serif;
+    font-weight: normal;
+    margin: 0px;
+    padding-top: 0px;
+    padding-bottom: 4px;
+    text-transform:uppercase;
+}
+
+h1 {
+    padding: 50px 10px 10px 30px;
+    font-size: 36px;
+    font-weight:700;
+}
+h2 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+p {
+    margin: 0px;
+    padding: 0px;
+    margin-bottom:20px;
+}
+
+#Container {
+    position: absolute;
+    top: 120px;
+    left: 30px;
+    bottom: 30px;
+    width: 0px;
+}
+
+#Content{
+    position: relative;
+    float: left;
+    height: calc(100% - 60px);
+}
+.spalte {
+    float: left;
+    width: 300px;
+    margin-right: 25px;
+    border-right: 1px solid #999;
+    padding-right: 20px;
+}
+
+    .spalte img {
+        width: 100%;
+    }
