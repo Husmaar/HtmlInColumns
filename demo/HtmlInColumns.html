@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>HtmlInColumns</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
     <script src="/dist/HtmlInColumns.min.js"></script>
     <link href="styles.css" rel="stylesheet" />
 </head>
@@ -127,15 +127,9 @@
     <script>
         $(document).ready(function () {
             var content = Object.create(HtmlInColumns);
-            content.extraHeightMargin = 30;
             content.init({ containerID: "#Content" });
-            content.on(HtmlInColumns.RENDERED, update);
             content.render();
         });
-
-        function update(data) {
-            $("#Container").width(data.width);
-        }
     </script>
 </body>
 </html>

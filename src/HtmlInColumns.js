@@ -1,13 +1,4 @@
-﻿/// <reference path="UUID.js" />
-/// <reference path="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js" />
-/// <reference path="../xml/XmlNode.js" />
-/// <reference path="../xml/XmlUtil.js" />
-/// <reference path="../utils/Objects.js" />
-/// <reference path="../development/Logger.js" />
-/// <reference path="../events/Event.js" />
-
-
-/**
+﻿/**
 *@namespace dk.marten.ui
 */
 /**
@@ -16,9 +7,7 @@
 * @author Marten Ølgaard
 * @created 12/6/2013
 * @license MIT
-* @copyright Marten Ølgaard 2013
 * @class HtmlInColumns
-* @event RENDERED {Object} Affyres når det hele er sat i spalter og returnere et objekt med width i.
 * @extends dk.marten.events.Event
 * @using jQuery
 * @using dk.marten.util.Arrays
@@ -35,7 +24,7 @@
 var HtmlInColumns = HtmlInColumns || (function () {
 
     "use strict"
-    var usingObj = ['jQuery', 'UUID', 'XmlNode', 'XmlUtil', 'Arrays', 'Objects', 'Event'];
+    var usingObj = ['jQuery', 'UUID', 'XmlNode', 'XmlUtil', 'Arrays', 'Objects', 'Event', 'Strings'];
     for (var i = 0; i < usingObj.length; i++) {
         if (typeof window[usingObj[i]] === "undefined") throw (new Error("HtmlInColumns relies on '" + usingObj[i] + "' which cant be found. Please add it to the html (before HtmlInColumns)."));
     }
@@ -47,47 +36,43 @@ var HtmlInColumns = HtmlInColumns || (function () {
     _r.defaults = {
         /**
         * The dom-id of the container div. Default is #Container
-        * Kan defineres ved kald til init
         * @property {string} options.containerID
         */
         containerID: "#Container",
         /**
-        * CSS klassen for hver kollonne. Default er spalte
-        * Kan defineres ved kald til init
+        * CSS class for the column divs. Default is column
         * @property {string} options.columnClass
         */
-        columnClass: "spalte",
+        columnClass: "column",
         /**
-        * Om der skal beskyttes od horeunger og franske horeunger.
+        * Should the script protect against orphans
         * Hvis denne er sat til true, vil tekst kunne blive højere end maxheight, dvs højere end containerens højde. 
         * Default er true
-        * Kan defineres ved kald til init
         * @property {Boolean} options.protectAgainstOrphans
         */
         protectAgainstOrphans: true
     }
 
     /**
-    * Tags der ikke må være i afslutningen af en kollonne
+    * Tags that cant be in the end of a column
     * @property {Array} nonLastTag
     */
     _r.nonLastTag = ["h1", "h2", "h3", "h4", "h5", "h6"];
 
     /**
-    * Tags der ikke må splittes op i flere kollonner
+    * Tags that cant be divided over two columns
     * @property {Array} nonSplitTag
     */
     _r.nonSplitTag = ["li", "tr", "div"];
 
     /**
-    * Antal anslag der angiver hvornår der er tale om en horeunge. Værdien er afhængig af hvor mange anslag der kan være i en spalte.
-    * @todo Kan man ikke regne antallet af anslag i en spalte ud og lave værdien automatisk?
+    * The number of char that defines a orphan
     * @property {int} orphansLength
     */
     _r.orphansLength = 60;
 
     /**
-   * Konstant der benyttes hvis man lytter efter event der affyres når renderingen er færdig
+   * Name of the event that fires when all the columns is rendered
    * @property {Number} RENDERED
    */
     Object.defineProperty(_r, "RENDERED", {
@@ -99,18 +84,21 @@ var HtmlInColumns = HtmlInColumns || (function () {
     * Bredden af spalterne
     * Hvis den ikke er defineret findes den automatisk - gad vide hvorfor man kan definere den!
     * @property {Number} columnWidth
+    * @private
     */
     _r.columnWidth = NaN;
     /**
     * Margin imellem spalterne
     * Hvis den ikke er defineret findes den automatisk - gad vide hvorfor man kan definere den!
     * @property {Number} columnMargin
+    * @private
     */
     _r.columnMargin = NaN;
 
     /**
     * Bruges på ARK sitet, men jeg har glemt præcist hvorfor - det bliver brugt til at sætte en bund margin
     * @property {Number} extraHeightMargin
+    * @private
     */
     _r.extraHeightMargin = 0;
 
@@ -148,15 +136,15 @@ var HtmlInColumns = HtmlInColumns || (function () {
     */
     _r.maxHeight = 0;
 
-    /*
-    *Indeholder alt htmlen. Sættes ved init.
+    /**
+    * Indeholder alt htmlen. Sættes ved init.
     * @property {String} altHtml
     * @private
     */
     _r.altHtml;
 
     /**
-    *Antallet af anslag som der typisk skal benyttes i en spalte.
+    * Antallet af anslag som der typisk skal benyttes i en spalte.
     * Benyttes for at give bedre performance
     * @property {Number} averageLetterCount
     * @private
@@ -212,27 +200,23 @@ var HtmlInColumns = HtmlInColumns || (function () {
 
 
     /**
-    * Initierer klassen
+    * Initialise the class
     * @method init
-    * @param {Object} options Diverse indstillinger som benyttes til at overwrite defualt indstillingerne
+    * @param {Object} options Settings that will be merged into the default settings
     */
     _r.init = function (options) {
-        //Logger.useScreenLog = true;
         this.uuid = UUID.get("_") + "_";
         this.options = Objects.combine([this.defaults, options]);
         Arrays.extendArray();
         this.altHtml = $(this.options.containerID).html();//Hent html fra siden
-        Logger.useScreenLog = false;
         $(this.options.containerID).html("");//Nulstil containeren med det hentede html
         $(this.options.containerID).show();//Vis containeren
 
         $(window).resize(this.onResize.bind(this));
     }
 
-
-
     /**
-    * Overordnet metode der renderer spalterne
+    *
     * @method onResize
     */
     _r.onResize = function () {
@@ -246,7 +230,7 @@ var HtmlInColumns = HtmlInColumns || (function () {
     * @method render
     */
     _r.render = function () {
-        if (this.altHtml == null) throw new Error("Intet html. Er init blevet kaldt?");
+        if (this.altHtml == null) throw new Error("No html. Have you called init?");
 
         if (this.isRunning) {
             this.abortRenderAndReRender = true;
@@ -255,7 +239,7 @@ var HtmlInColumns = HtmlInColumns || (function () {
         this.isRunning = true;
         this.lastRenderHeight = window.innerHeight;
 
-        Logger.startStopwatch();
+        //Logger.startStopwatch();
 
         //Nulstil variabler
         this.columnMaxHeight = 0;
@@ -276,7 +260,7 @@ var HtmlInColumns = HtmlInColumns || (function () {
 
         this.renderNextColumn();
 
-        $(this.options.containerID + " .spalte").height(this.columnMaxHeight);
+        $(this.options.containerID + " ." + _r.defaults.columnClass).height(this.columnMaxHeight);
 
     }
     /**
@@ -334,13 +318,12 @@ var HtmlInColumns = HtmlInColumns || (function () {
             setTimeout(this.renderNextColumn.bind(this), 0);
         }
         else {
-            Logger.logStopwatch("end");
+            //Logger.logStopwatch("end");
             this.preLoadImages();
             this.isRunning = false;
             this.abortRenderAndReRender = false;
             this.fire({ type: this.RENDERED, width: $(this.options.containerID).width() });
         }
-
     }
 
 
@@ -662,8 +645,6 @@ var HtmlInColumns = HtmlInColumns || (function () {
             }
         }
     }
-
-
 
     /**
     * Opreter en ny spalte i dokumentet html og returnerer id for spalten

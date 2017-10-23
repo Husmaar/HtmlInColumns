@@ -45,7 +45,7 @@ p {
     float: left;
     height: calc(100% - 60px);
 }
-.spalte {
+.column {
     float: left;
     width: 300px;
     margin-right: 25px;
@@ -53,6 +53,6 @@ p {
     padding-right: 20px;
 }
 
-    .spalte img {
+    .column img {
         width: 100%;
     }
