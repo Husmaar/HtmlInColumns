@@ -137,11 +137,10 @@ var HtmlInColumns = HtmlInColumns || (function () {
     _r.maxHeight = 0;
 
     /**
-    * Indeholder alt htmlen. Sættes ved init.
-    * @property {String} altHtml
-    * @private
+    * Contains the raw html
+    * @property {String} allHtml
     */
-    _r.altHtml;
+    _r.allHtml;
 
     /**
     * Antallet af anslag som der typisk skal benyttes i en spalte.
@@ -197,6 +196,7 @@ var HtmlInColumns = HtmlInColumns || (function () {
 
     _r.loadCount;
 
+    _r.allImages = [];
 
 
     /**
@@ -207,8 +207,7 @@ var HtmlInColumns = HtmlInColumns || (function () {
     _r.init = function (options) {
         this.uuid = UUID.get("_") + "_";
         this.options = Objects.combine([this.defaults, options]);
-        Arrays.extendArray();
-        this.altHtml = $(this.options.containerID).html();//Hent html fra siden
+        this.allHtml = $(this.options.containerID).html();//Hent html fra siden
         $(this.options.containerID).html("");//Nulstil containeren med det hentede html
         $(this.options.containerID).show();//Vis containeren
 
@@ -216,7 +215,7 @@ var HtmlInColumns = HtmlInColumns || (function () {
     }
 
     /**
-    *
+    * Is called on resize. Will try to re render.
     * @method onResize
     */
     _r.onResize = function () {
@@ -226,16 +225,17 @@ var HtmlInColumns = HtmlInColumns || (function () {
     }
 
     /**
-    * Overordnet metode der renderer spalterne
+    * Renders the content into columns
     * @method render
     */
     _r.render = function () {
-        if (this.altHtml == null) throw new Error("No html. Have you called init?");
+        if (this.allHtml == null) throw new Error("No html. Have you called init?");
 
         if (this.isRunning) {
             this.abortRenderAndReRender = true;
             return;
         }
+
         this.isRunning = true;
         this.lastRenderHeight = window.innerHeight;
 
@@ -252,9 +252,9 @@ var HtmlInColumns = HtmlInColumns || (function () {
 
         this.columnCount = 0;
 
-        //Logger.log(this.altHtml);
+        //Logger.log(this.allHtml);
 
-        this.urenderedeHtmlNoder = XmlUtil.splitXml(this.altHtml);
+        this.urenderedeHtmlNoder = XmlUtil.splitXml(this.allHtml);
 
         //Logger.log(this.urenderedeHtmlNoder);
 
@@ -264,9 +264,8 @@ var HtmlInColumns = HtmlInColumns || (function () {
 
     }
     /**
-    * Starter forfra med renderingen
+    * Restarts the rendering
     * @method reRender
-    * @private
     */
     _r.reRender = function () {
         this.abortRenderAndReRender = false;
@@ -306,24 +305,34 @@ var HtmlInColumns = HtmlInColumns || (function () {
         }
 
         this.urenderedeHtmlNoder = resultNoder.remaining;
-
+        
         //Indsætter html i aktuel spalte
         this.finishColumn(XmlUtil.concatXmlNodeArrayHtml(resultNoder.added));
+        
 
         for (var i = 0; i < resultNoder.added.length; i++) {
             this.columnLetterCount += resultNoder.added[i].length;
         }
 
         if (this.urenderedeHtmlNoder.length > 0) {
-            setTimeout(this.renderNextColumn.bind(this), 0);
+            setTimeout(this.renderNextColumn.bind(this), 0);//put job back in the queue to show the newly added column
         }
         else {
-            //Logger.logStopwatch("end");
-            this.preLoadImages();
-            this.isRunning = false;
-            this.abortRenderAndReRender = false;
-            this.fire({ type: this.RENDERED, width: $(this.options.containerID).width() });
+            this.renderDone();
         }
+    }
+    
+    /**
+    * 
+    * @method renderDone
+    * @private
+    */
+    _r.renderDone = function () {
+        //Logger.logStopwatch("end");
+        this.preLoadImages();
+        this.isRunning = false;
+        this.abortRenderAndReRender = false;
+        this.fire({ type: this.RENDERED, width: $(this.options.containerID).width() });
     }
 
 
@@ -490,7 +499,7 @@ var HtmlInColumns = HtmlInColumns || (function () {
     }
 
     /**
-    * Finder ud af hvor meget tekst fra en node der er plads til i den rresterende del af spalten
+    * Finder ud af hvor meget tekst fra en node der er plads til i den resterende del af spalten
     * Derudover tjekkes der også for horeunger og franske horeunger
     * @method findTextContent
     * @private
@@ -498,7 +507,8 @@ var HtmlInColumns = HtmlInColumns || (function () {
     * @param {String} existingHtml Html der allerede er testet og som der er plads til
     * @param {String} nodeStart Html inden test teksten 
     * @param {String} nodeSlut Html efter test teksten 
-    *@returns {Object} {added, remaining} object
+    * @returns {Object} {added, remaining} object
+    * @private
     */
     _r.findTextContent = function (node, existingHtml, nodeStart, nodeSlut) {
         var direction, previousDirection, testHtml, testForIndex, nodeWords;
@@ -545,6 +555,7 @@ var HtmlInColumns = HtmlInColumns || (function () {
     * @private
     * @param {String} html 
     * @returns {Number} [-1|1] -1 hvis indholdet overskrider spaltens højde og 1 hvis spalten endnu ikke er udfyldt
+    * @private
     */
     _r.testHeight = function (html) {
         $("#" + this.columnID).html(html);
@@ -577,17 +588,22 @@ var HtmlInColumns = HtmlInColumns || (function () {
                 + parseInt($("#" + this.columnID).css("border-right-width").replace("px", ""))
                 + parseInt($("#" + this.columnID).css("border-left-width").replace("px", ""));
         }
-
-        this.columnMaxHeight = Math.max($("#" + this.columnID).height(), this.columnMaxHeight);
+        
+        if (this.columnMaxHeight < $("#" + this.columnID).height()) {
+            this.columnMaxHeight = $("#" + this.columnID).height();
+            jQuery(this.options.containerID + " div").height(this.columnMaxHeight);
+        } else {
+            $("#" + this.columnID).height(this.columnMaxHeight);
+        }
 
         this.columnCount++;
-        $(this.options.containerID).css({ width: ((this.columnWidth + this.columnMargin) * this.columnCount) });
+        $(this.options.containerID).css({ width: ((this.columnWidth + this.columnMargin) * this.columnCount) });     
     }
-    _r.allImages = [];
 
     /**
     * Sætter onload tag ind i img
     * @method updateImgTag
+    * @private
     */
     _r.updateImgTag = function (html, columnWidth, columnID) {
         var imgRE = new RegExp("<img", "gi");
@@ -612,6 +628,7 @@ var HtmlInColumns = HtmlInColumns || (function () {
     /**
     * Preloader alle billederne i html-en
     * @method preLoadImages
+    * @private
     */
     _r.preLoadImages = function () {
         this.loadCount = this.allImages.length;
@@ -625,6 +642,7 @@ var HtmlInColumns = HtmlInColumns || (function () {
     /**
     * Kaldes når et billede er loaded og gen renderer hvis en spalte er blevet for høj
     * @method picLoaded
+    * @private
     */
     _r.picLoaded = function () {
         var heightThreshold = 50;
@@ -660,6 +678,9 @@ var HtmlInColumns = HtmlInColumns || (function () {
         return id;
     }
 
+
+    
+    
     return _r;
 })();
 

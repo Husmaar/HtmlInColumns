@@ -452,7 +452,7 @@ var Logger = Logger || (function () {
 */
 
 /**
-* Forskellige funktioner til at bearbejde arrays
+* A selection of function for working with arrays
 * 
 * @author Marten Ølgaard
 * @created 24/4/2013
@@ -625,10 +625,9 @@ var Arrays = Arrays || (function () {
 	    }
 
 	    if (console) {
-	        if (console.info) console.info("Array er udvidet med " + em);
-	        else if (console.log) console.log("Array er udvidet med " + em);
+	        if (console.info) console.info("Array has been extended with: " + em);
+            else if (console.log) console.log("Array has been extended with: " + em);
 	    }
-
 	}
 
 	var indexOf = function (elt ) {
@@ -1411,8 +1410,17 @@ var UUID = UUID || (function () {
 
     var used = {};
 
+    /**
+    * The dividet in the uuid
+    * @property {string} divider
+    */
     _r.divider = "-";
 
+    /**
+    * Creates and return an UUID
+    * @method get
+    * @param {Object} divider Set an divider. Optional.
+    */
     _r.get = function (divider) {
         if (divider!= null) _r.divider = divider;
         var id;
@@ -1435,13 +1443,12 @@ var UUID = UUID || (function () {
 */
 
 /**
-* Klasse til at lave eventlistenr med
-* Kan bl.a. som "superklasse" for andre javascript "klasser"
+* Class to add event functionality to other calsses
+* Are usually used as a "super" class
 * @class Event
 * @constructor
 * @author Marten Ølgaard
 * @see <a href="/Javascript/Eksempler/dk/marten/events/Event.html" target="_blank">Eksempel med brug Event klassen</a>
-* @todo one implementeringen er alt andet end elegant.
 */
 (function () {
 
@@ -1468,14 +1475,14 @@ var UUID = UUID || (function () {
     }
 
     /**
-    * Tilføjer event der skal lyttes på
+    * Adds an event
     * @method on
-    * @param {String} type Type af event der skal lyttes efter
-    * @param {Function} listener function der skal kaldes når et event skal affyres
+    * @param {String} type Name of the event
+    * @param {Function} listener function that will be called when the event fires
     */
     Event.prototype.on = function (type, listener) {
         if (type == null || listener == null) {
-            throw (new Error("type eller listener er null i " + this._name));
+            throw (new Error("type eller listener is null in " + this._name));
         }
         if (typeof this._listeners[type] === "undefined") {
             this._listeners[type] = [];
@@ -1493,13 +1500,11 @@ var UUID = UUID || (function () {
         }
     }
 
-
-
     /**
-    * Tilføjer event der skal lyttes på. Dette event fjernes efter det første gang er kaldt
+    * Adds an event that will be fired only once
     * @method one
-    * @param {String} type Type af event der skal lyttes efter
-    * @param {Function} listener function der skal kaldes når et event skal affyres
+    * @param {String} type Name of the event
+    * @param {Function} listener function that will be called when the event fires
     */
     Event.prototype.one = function (type, listener) {
         if (type == null || listener == null) {
@@ -1527,13 +1532,13 @@ var UUID = UUID || (function () {
     }
 
     /**
-    * Tilføjer event der skal lyttes på
+    * Fires an event
     * @method fire
-    * @param {Object|String} event Object med data om hvad der skal affyres
-    * Event typen kan enten være i object eller som streng
+    * @param {Object|String} event Object with data about the event that are going to be fired
+    * The event type can be as an string or in an object
     * @example this.fire({ type: "foo" });
     * this.fire("foo");//shortcut
-    * this.fire({ type: "foo", svaret:"42" });//custom data i event
+    * this.fire({ type: "foo", answer:"42" });//custom data i event
     */
     Event.prototype.fire = function (event) {
         if (typeof event == "string") {
@@ -1563,20 +1568,14 @@ var UUID = UUID || (function () {
                     if (exists) this.off(event.type, listener);
                 }
             }
-
-           
-
         }
-
-        
-
     }
 
     /**
-    * Fjerner et event fra listen
+    * Removes an event from the list
     * @method off
-    * @param {String} type Type af event der skal lyttes efter
-    * @param {Array} listener Funktioner for den pågældende type der ikke længere skal lyttes efter
+    * @param {String} type Name of the event
+    * @param {Function} listener The function that is associated with the name. If no function is added all events with the choosen name are removed
     */
     Event.prototype.off = function (type, listener) {
         if (this._listeners[type] instanceof Array) {
@@ -1732,11 +1731,10 @@ var HtmlInColumns = HtmlInColumns || (function () {
     _r.maxHeight = 0;
 
     /**
-    * Indeholder alt htmlen. Sættes ved init.
-    * @property {String} altHtml
-    * @private
+    * Contains the raw html
+    * @property {String} allHtml
     */
-    _r.altHtml;
+    _r.allHtml;
 
     /**
     * Antallet af anslag som der typisk skal benyttes i en spalte.
@@ -1792,6 +1790,7 @@ var HtmlInColumns = HtmlInColumns || (function () {
 
     _r.loadCount;
 
+    _r.allImages = [];
 
 
     /**
@@ -1802,8 +1801,7 @@ var HtmlInColumns = HtmlInColumns || (function () {
     _r.init = function (options) {
         this.uuid = UUID.get("_") + "_";
         this.options = Objects.combine([this.defaults, options]);
-        Arrays.extendArray();
-        this.altHtml = $(this.options.containerID).html();//Hent html fra siden
+        this.allHtml = $(this.options.containerID).html();//Hent html fra siden
         $(this.options.containerID).html("");//Nulstil containeren med det hentede html
         $(this.options.containerID).show();//Vis containeren
 
@@ -1811,7 +1809,7 @@ var HtmlInColumns = HtmlInColumns || (function () {
     }
 
     /**
-    *
+    * Is called on resize. Will try to re render.
     * @method onResize
     */
     _r.onResize = function () {
@@ -1821,16 +1819,17 @@ var HtmlInColumns = HtmlInColumns || (function () {
     }
 
     /**
-    * Overordnet metode der renderer spalterne
+    * Renders the content into columns
     * @method render
     */
     _r.render = function () {
-        if (this.altHtml == null) throw new Error("No html. Have you called init?");
+        if (this.allHtml == null) throw new Error("No html. Have you called init?");
 
         if (this.isRunning) {
             this.abortRenderAndReRender = true;
             return;
         }
+
         this.isRunning = true;
         this.lastRenderHeight = window.innerHeight;
 
@@ -1847,9 +1846,9 @@ var HtmlInColumns = HtmlInColumns || (function () {
 
         this.columnCount = 0;
 
-        //Logger.log(this.altHtml);
+        //Logger.log(this.allHtml);
 
-        this.urenderedeHtmlNoder = XmlUtil.splitXml(this.altHtml);
+        this.urenderedeHtmlNoder = XmlUtil.splitXml(this.allHtml);
 
         //Logger.log(this.urenderedeHtmlNoder);
 
@@ -1859,9 +1858,8 @@ var HtmlInColumns = HtmlInColumns || (function () {
 
     }
     /**
-    * Starter forfra med renderingen
+    * Restarts the rendering
     * @method reRender
-    * @private
     */
     _r.reRender = function () {
         this.abortRenderAndReRender = false;
@@ -1901,24 +1899,34 @@ var HtmlInColumns = HtmlInColumns || (function () {
         }
 
         this.urenderedeHtmlNoder = resultNoder.remaining;
-
+        
         //Indsætter html i aktuel spalte
         this.finishColumn(XmlUtil.concatXmlNodeArrayHtml(resultNoder.added));
+        
 
         for (var i = 0; i < resultNoder.added.length; i++) {
             this.columnLetterCount += resultNoder.added[i].length;
         }
 
         if (this.urenderedeHtmlNoder.length > 0) {
-            setTimeout(this.renderNextColumn.bind(this), 0);
+            setTimeout(this.renderNextColumn.bind(this), 0);//put job back in the queue to show the newly added column
         }
         else {
-            //Logger.logStopwatch("end");
-            this.preLoadImages();
-            this.isRunning = false;
-            this.abortRenderAndReRender = false;
-            this.fire({ type: this.RENDERED, width: $(this.options.containerID).width() });
+            this.renderDone();
         }
+    }
+    
+    /**
+    * 
+    * @method renderDone
+    * @private
+    */
+    _r.renderDone = function () {
+        //Logger.logStopwatch("end");
+        this.preLoadImages();
+        this.isRunning = false;
+        this.abortRenderAndReRender = false;
+        this.fire({ type: this.RENDERED, width: $(this.options.containerID).width() });
     }
 
 
@@ -2085,7 +2093,7 @@ var HtmlInColumns = HtmlInColumns || (function () {
     }
 
     /**
-    * Finder ud af hvor meget tekst fra en node der er plads til i den rresterende del af spalten
+    * Finder ud af hvor meget tekst fra en node der er plads til i den resterende del af spalten
     * Derudover tjekkes der også for horeunger og franske horeunger
     * @method findTextContent
     * @private
@@ -2093,7 +2101,8 @@ var HtmlInColumns = HtmlInColumns || (function () {
     * @param {String} existingHtml Html der allerede er testet og som der er plads til
     * @param {String} nodeStart Html inden test teksten 
     * @param {String} nodeSlut Html efter test teksten 
-    *@returns {Object} {added, remaining} object
+    * @returns {Object} {added, remaining} object
+    * @private
     */
     _r.findTextContent = function (node, existingHtml, nodeStart, nodeSlut) {
         var direction, previousDirection, testHtml, testForIndex, nodeWords;
@@ -2140,6 +2149,7 @@ var HtmlInColumns = HtmlInColumns || (function () {
     * @private
     * @param {String} html 
     * @returns {Number} [-1|1] -1 hvis indholdet overskrider spaltens højde og 1 hvis spalten endnu ikke er udfyldt
+    * @private
     */
     _r.testHeight = function (html) {
         $("#" + this.columnID).html(html);
@@ -2172,17 +2182,22 @@ var HtmlInColumns = HtmlInColumns || (function () {
                 + parseInt($("#" + this.columnID).css("border-right-width").replace("px", ""))
                 + parseInt($("#" + this.columnID).css("border-left-width").replace("px", ""));
         }
-
-        this.columnMaxHeight = Math.max($("#" + this.columnID).height(), this.columnMaxHeight);
+        
+        if (this.columnMaxHeight < $("#" + this.columnID).height()) {
+            this.columnMaxHeight = $("#" + this.columnID).height();
+            jQuery(this.options.containerID + " div").height(this.columnMaxHeight);
+        } else {
+            $("#" + this.columnID).height(this.columnMaxHeight);
+        }
 
         this.columnCount++;
-        $(this.options.containerID).css({ width: ((this.columnWidth + this.columnMargin) * this.columnCount) });
+        $(this.options.containerID).css({ width: ((this.columnWidth + this.columnMargin) * this.columnCount) });     
     }
-    _r.allImages = [];
 
     /**
     * Sætter onload tag ind i img
     * @method updateImgTag
+    * @private
     */
     _r.updateImgTag = function (html, columnWidth, columnID) {
         var imgRE = new RegExp("<img", "gi");
@@ -2207,6 +2222,7 @@ var HtmlInColumns = HtmlInColumns || (function () {
     /**
     * Preloader alle billederne i html-en
     * @method preLoadImages
+    * @private
     */
     _r.preLoadImages = function () {
         this.loadCount = this.allImages.length;
@@ -2220,6 +2236,7 @@ var HtmlInColumns = HtmlInColumns || (function () {
     /**
     * Kaldes når et billede er loaded og gen renderer hvis en spalte er blevet for høj
     * @method picLoaded
+    * @private
     */
     _r.picLoaded = function () {
         var heightThreshold = 50;
@@ -2255,6 +2272,9 @@ var HtmlInColumns = HtmlInColumns || (function () {
         return id;
     }
 
+
+    
+    
     return _r;
 })();
 

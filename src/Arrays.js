@@ -3,7 +3,7 @@
 */
 
 /**
-* Forskellige funktioner til at bearbejde arrays
+* A selection of function for working with arrays
 * 
 * @author Marten Ølgaard
 * @created 24/4/2013
@@ -176,10 +176,9 @@ var Arrays = Arrays || (function () {
 	    }
 
 	    if (console) {
-	        if (console.info) console.info("Array er udvidet med " + em);
-	        else if (console.log) console.log("Array er udvidet med " + em);
+	        if (console.info) console.info("Array has been extended with: " + em);
+            else if (console.log) console.log("Array has been extended with: " + em);
 	    }
-
 	}
 
 	var indexOf = function (elt ) {

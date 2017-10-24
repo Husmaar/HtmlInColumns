@@ -18,8 +18,17 @@ var UUID = UUID || (function () {
 
     var used = {};
 
+    /**
+    * The dividet in the uuid
+    * @property {string} divider
+    */
     _r.divider = "-";
 
+    /**
+    * Creates and return an UUID
+    * @method get
+    * @param {Object} divider Set an divider. Optional.
+    */
     _r.get = function (divider) {
         if (divider!= null) _r.divider = divider;
         var id;

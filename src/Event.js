@@ -3,13 +3,12 @@
 */
 
 /**
-* Klasse til at lave eventlistenr med
-* Kan bl.a. som "superklasse" for andre javascript "klasser"
+* Class to add event functionality to other calsses
+* Are usually used as a "super" class
 * @class Event
 * @constructor
 * @author Marten Ølgaard
 * @see <a href="/Javascript/Eksempler/dk/marten/events/Event.html" target="_blank">Eksempel med brug Event klassen</a>
-* @todo one implementeringen er alt andet end elegant.
 */
 (function () {
 
@@ -36,14 +35,14 @@
     }
 
     /**
-    * Tilføjer event der skal lyttes på
+    * Adds an event
     * @method on
-    * @param {String} type Type af event der skal lyttes efter
-    * @param {Function} listener function der skal kaldes når et event skal affyres
+    * @param {String} type Name of the event
+    * @param {Function} listener function that will be called when the event fires
     */
     Event.prototype.on = function (type, listener) {
         if (type == null || listener == null) {
-            throw (new Error("type eller listener er null i " + this._name));
+            throw (new Error("type eller listener is null in " + this._name));
         }
         if (typeof this._listeners[type] === "undefined") {
             this._listeners[type] = [];
@@ -61,13 +60,11 @@
         }
     }
 
-
-
     /**
-    * Tilføjer event der skal lyttes på. Dette event fjernes efter det første gang er kaldt
+    * Adds an event that will be fired only once
     * @method one
-    * @param {String} type Type af event der skal lyttes efter
-    * @param {Function} listener function der skal kaldes når et event skal affyres
+    * @param {String} type Name of the event
+    * @param {Function} listener function that will be called when the event fires
     */
     Event.prototype.one = function (type, listener) {
         if (type == null || listener == null) {
@@ -95,13 +92,13 @@
     }
 
     /**
-    * Tilføjer event der skal lyttes på
+    * Fires an event
     * @method fire
-    * @param {Object|String} event Object med data om hvad der skal affyres
-    * Event typen kan enten være i object eller som streng
+    * @param {Object|String} event Object with data about the event that are going to be fired
+    * The event type can be as an string or in an object
     * @example this.fire({ type: "foo" });
     * this.fire("foo");//shortcut
-    * this.fire({ type: "foo", svaret:"42" });//custom data i event
+    * this.fire({ type: "foo", answer:"42" });//custom data i event
     */
     Event.prototype.fire = function (event) {
         if (typeof event == "string") {
@@ -131,20 +128,14 @@
                     if (exists) this.off(event.type, listener);
                 }
             }
-
-           
-
         }
-
-        
-
     }
 
     /**
-    * Fjerner et event fra listen
+    * Removes an event from the list
     * @method off
-    * @param {String} type Type af event der skal lyttes efter
-    * @param {Array} listener Funktioner for den pågældende type der ikke længere skal lyttes efter
+    * @param {String} type Name of the event
+    * @param {Function} listener The function that is associated with the name. If no function is added all events with the choosen name are removed
     */
     Event.prototype.off = function (type, listener) {
         if (this._listeners[type] instanceof Array) {
