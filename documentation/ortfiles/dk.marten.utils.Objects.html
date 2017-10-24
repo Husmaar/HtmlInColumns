@@ -1,0 +1,67 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Actionscript documentation</title>
+      <link rel="stylesheet" href="../OrteliusFrame/style.css" type="text/css" media="screen">
+   </head>
+   <body>
+      <div class="classDetails" ID="dk.marten.utils.Objects">
+         <div class="classTitle">Objects</div>
+         <div class="summary">Forskellige funktioner til at bearbejde Objects<br/></div>
+         <div class="detailHeader">Details</div>
+         <div id="div|details" class="hiddenElement">
+            <div class="detailElement"><b>Package: </b>dk.marten.utils
+            </div>
+            <div class="detailElement"><b>File modified: </b>12/2 2017
+            </div>
+            <div class="detailElement"><b>Author: </b>Marten Ølgaard<br/>
+            </div>
+         </div>
+         <div class="detailHeader">See</div>
+         <div id="div|see" class="hiddenElement"><img src=../OrteliusFrame/arrowright.gif height=9 width=10/> <a href="/Javascript/Eksempler/dk/marten/utils/Objects.html">Se
+            unit test af difference</a><br/><br></div>
+         <div class="detailHeader">Public methods</div>
+         <div id="div|publicmethod" class="detailsVisible">
+            <table border="0" cellpadding="0" cellspacing="0" class="methodPropertyTabel">
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.utils.Objects.addNonSupportedObjectCreate_207.html" title="addNonSupportedObjectCreate(obj)">
+                        <name>addNonSupportedObjectCreate</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Tilføjer Object.Create for browsere der ikke understøtter dette.<br/>This polyfill covers the main use case which is creating
+                     a new object for which the prototype has been chosen but doesn't take the second argument into account.<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.utils.Objects.clone_204.html" title="clone(obj)">
+                        <name>clone</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Funktionalitet der forsøger at clone et object. Cloner kun de simplere typer og ikke referencer til andre objekter, functions
+                     e.lign.<br/>Desuden er det kun objectets værdier der klones og ikke evtuelle værdier der ligger i prototype hierakiet. Dvs.
+                     at hvis objektet er skabt med Object.create kan der optså problemmer!<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.utils.Objects.combine_205.html" title="combine(allObjects, doClone)">
+                        <name>combine</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Merger et antal objekter ind i et nyt objekt der returneres. De objekter der merges påvirkes ikke.<br/>Hvis flere af objekterne
+                     deler properties med samme navn vil det være det sidste objekt i af arrayen hvis værdi der kommer til at gælde.<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.utils.Objects.difference_206.html" title="difference(oldObjects, newObjects, keyName)">
+                        <name>difference</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Finder forskellen mellem to objekter.<br/>Kan kun benyttes på relativt simple objekter<br/>Er lavet til logbogen (render)<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.utils.Objects.isEqual_208.html" title="isEqual()">
+                        <name>isEqual</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Tjekker om en række objekter er ens, dvs. har de samme værdier uanset rækkefølgende.<br/>Metoden er tyvstjålet<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+            </table>
+            <div class="modifierExplanation"><img border="0" src="../OrteliusFrame/inheritedmodifier.gif" title="inherited">=inherited
+               	
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

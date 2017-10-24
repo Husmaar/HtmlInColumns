@@ -1,0 +1,232 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Actionscript documentation</title>
+      <link rel="stylesheet" href="../OrteliusFrame/style.css" type="text/css" media="screen">
+   </head>
+   <body>
+      <div class="classDetails" ID="dk.marten.development.Logger">
+         <div class="classTitle">Logger</div>
+         <div class="summary">Hjælpeværktøj til at debugge. Benyttes til at logge beskeder ud. Der benyttes <code>console</code> som udgangspunkt i logningen.<br/>Hvis
+            den valgte logmetode ikke findes vælges en anden fallback og hvis browseren slet ikke understøtter console.log sørger modulet
+            også for at javascript afviklingen ikke går i stå (som det ellers sker i gamle msie).<br/>Man kan også slå screenloggen til
+            så logningen forgår i dom-en.<br/>Man kan angive hvilket niveau man ønsker at logge, så man f.eks. kun logger fejl eller slår
+            logningen helt fra.<br/>Hvis man bruger screenlog skal jQuery også være tilstede.<br/>
+         </div>
+         <div class="detailHeader">Details</div>
+         <div id="div|details" class="hiddenElement">
+            <div class="detailElement"><b>Package: </b>dk.marten.development
+            </div>
+            <div class="detailElement"><b>File modified: </b>8/11 2016
+            </div>
+            <div class="detailElement"><b>Author: </b>Marten Ølgaard<br/>
+            </div>
+         </div>
+         <div class="detailHeader">Example code</div>
+         <div id="div|example" class="hiddenElement">
+            <div class="detailElement"><code><br/>Logger.useScreenLog = true;<br/>Logger.info("start logning");<br/><br/>Logger.group("Tidslogning");<br/>Logger.startStopwatch();<br/>Logger.logStopwatch("Starttid");<br/>Logger.groupEnd();<br/></code></div>
+         </div>
+         <div class="detailHeader">See</div>
+         <div id="div|see" class="hiddenElement"><img src=../OrteliusFrame/arrowright.gif height=9 width=10/> <a href="/Javascript/Eksempler/dk/marten/development/Logger.html">Se
+            eksempel</a><br/><br></div>
+         <div class="detailHeader">Public methods</div>
+         <div id="div|publicmethod" class="detailsVisible">
+            <table border="0" cellpadding="0" cellspacing="0" class="methodPropertyTabel">
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.assert_194.html" title="assert(condition, message)">
+                        <name>assert</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Svarer til den tilsvarende console funktionalitet<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.count_195.html" title="count(countID)">
+                        <name>count</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Svarer til den tilsvarende console funktionalitet<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.debug_186.html" title="debug(message)">
+                        <name>debug</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Svarer til den tilsvarende console funktionalitet<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.error_189.html" title="error(message)">
+                        <name>error</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Log-er en tekst ud som fejl hvis browseren understøtter dette<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.getStopwatch_200.html" title="getStopwatch()">
+                        <name>getStopwatch</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Finder tiden siden uret er startet<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.group_191.html" title="group(Overskrift)">
+                        <name>group</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Svarer til den tilsvarende console funktionalitet<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.groupCollapsed_192.html" title="groupCollapsed(Overskrift)">
+                        <name>groupCollapsed</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Svarer til den tilsvarende console funktionalitet<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.groupEnd_193.html" title="groupEnd()">
+                        <name>groupEnd</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Svarer til den tilsvarende console funktionalitet<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.info_187.html" title="info(message)">
+                        <name>info</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Svarer til den tilsvarende console funktionalitet<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.log_184.html" title="log(message)">
+                        <name>log</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Log-er en tekst ud hvis browseren understøtter dette<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.logLoadPerformance_201.html" title="logLoadPerformance()">
+                        <name>logLoadPerformance</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Logger data ud om tidsforbrug i forbindelse med load af siden<br/>Denne metode bør først kaldes efter onload<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.logStopwatch_199.html" title="logStopwatch(messageBesked)">
+                        <name>logStopwatch</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Logger tiden siden uret er startet<br/>Hvis uret ikke er startet startes dette<br/>Kræver at active er true (default værdien)<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.resetStopwatch_197.html" title="resetStopwatch()">
+                        <name>resetStopwatch</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Nulstiller Stopwatch<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.screenLog_190.html" title="screenLog(message, ccsClass)">
+                        <name>screenLog</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Log-er en tekst ud på et lag i browseren<br/>Er blandt andet godt når man arbejder med en tablet<br/>Bruges mest internt hvis
+                     man har sat flaget useScreenLog<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.startStopwatch_196.html" title="startStopwatch()">
+                        <name>startStopwatch</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Starter Stopwatch<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.stopStopwatch_198.html" title="stopStopwatch()">
+                        <name>stopStopwatch</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Stopper Stopwatch<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.toString_202.html" title="toString()">
+                        <name>toString</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.trace_185.html" title="trace(message)">
+                        <name>trace</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Log-er en tekst ud som advarsel hvis browseren understøtter dette<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.warn_188.html" title="warn(message)">
+                        <name>warn</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Log-er en tekst ud som advarsel hvis browseren understøtter dette<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+            </table>
+            <div class="modifierExplanation"><img border="0" src="../OrteliusFrame/inheritedmodifier.gif" title="inherited">=inherited
+               	
+            </div>
+         </div>
+         <div class="detailHeader">Public properties</div>
+         <div id="div|publicproperties" class="detailsVisible">
+            <table border="0" cellpadding="0" cellspacing="0" class="methodPropertyTabel">
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.LOG_ALL_181.html" title="LOG_ALL">
+                        <name>LOG_ALL</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Konstant der benyttes til at definere logLevel<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.LOG_ERROR_178.html" title="LOG_ERROR">
+                        <name>LOG_ERROR</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Konstant der benyttes til at definere logLevel. Logger kun fejl ud.<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.LOG_ERROR_WARN_179.html" title="LOG_ERROR_WARN">
+                        <name>LOG_ERROR_WARN</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Konstant der benyttes til at definere logLevel<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.LOG_ERROR_WARN_INFO_180.html" title="LOG_ERROR_WARN_INFO">
+                        <name>LOG_ERROR_WARN_INFO</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Konstant der benyttes til at definere logLevel<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.LOG_NONE_177.html" title="LOG_NONE">
+                        <name>LOG_NONE</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Konstant der benyttes til at definere logLevel. Slår alt logning fra.<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.gotConsole_173.html" title="gotConsole">
+                        <name>gotConsole</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Angiver om browseren har console til rådighed. Benyttes primært internt.<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.logLevel_182.html" title="logLevel">
+                        <name>logLevel</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Hvor mange informationer der skal logges ud<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.screenLogCss_183.html" title="screenLogCss">
+                        <name>screenLogCss</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Css der styrer screenlogen. Benyttes kun hvis useScreenLog er true<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.traceAllLogs_176.html" title="traceAllLogs">
+                        <name>traceAllLogs</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Om der skal benyttes trace i stedet for log. Kan være handy hvis man skal finde hvor i koden der logges, feks. for at fjerne
+                     disse logs<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.useAlertAsAlternertive_174.html" title="useAlertAsAlternertive">
+                        <name>useAlertAsAlternertive</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Om der skal benyttes alert som alternativ til console.log hvis der ikke er adgang til denne<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+               <tr class="methodPropertyLine">
+                  <td class="methodPropertyTitle"><img border="0" height="9" width="10" src="../OrteliusFrame/arrowright.gif"><a target="contentFrame" href="dk.marten.development.Logger.useScreenLog_175.html" title="useScreenLog">
+                        <name>useScreenLog</name></a></td>
+                  <td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+                  <td class="methodPropertySummary">Om log informationerne skal skrives på et lag der ligger oven på content<br/><img border="0" src="../OrteliusFrame/modifier.gif"></td>
+               </tr>
+            </table>
+            <div class="modifierExplanation"><img border="0" src="../OrteliusFrame/inheritedmodifier.gif" title="inherited">=inherited
+               	
+            </div>
+         </div>
+      </div>
+   </body>
+</html>
